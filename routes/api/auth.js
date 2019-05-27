@@ -6,7 +6,44 @@ const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
 const path = require("path");
+const util = require("util");
 const { check, validationResult } = require("express-validator/check");
+
+// @route    GET api/auth
+// @desc     Get user data
+// @access   Public
+router.get("/", auth, async (req, res) => {
+  const readFile = util.promisify(fs.readFile);
+  try {
+    filename = path.resolve(__dirname, "../../users.txt");
+    readFile(filename, "utf8")
+      .then(data => {
+        console.log(data);
+        const lines = data.split("\n");
+        for (line in lines) {
+          fileName = lines[line].split("|")[0];
+          fileEmail = lines[line].split("|")[1];
+          if (req.user.email === fileEmail) {
+            return true;
+          }
+        }
+        return false;
+      })
+      .then(bool => {
+        if (bool) {
+          res.json({ found: true, name: fileName, email: fileEmail });
+        } else {
+          res.json({
+            found: false,
+            msg: "No user found with the current email"
+          });
+        }
+      });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 // @route    POST api/auth
 // @desc     Authenticate user & get token

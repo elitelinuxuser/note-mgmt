@@ -16,6 +16,7 @@ app.use("/api/list", require("./routes/api/listnotes"));
 app.use("/api/update", require("./routes/api/updatenote"));
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/search", require("./routes/api/searchnote"));
 
 const port = process.env.PORT || 5000;
 
