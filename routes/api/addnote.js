@@ -1,13 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const auth = require("../../middleware/auth");
 const bcrypt = require("bcryptjs");
 
 const fs = require("fs");
 
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   title = req.body.title;
   desc = req.body.desc;
+  email = req.user.email;
   midData = title + "|" + desc;
   //Encrypt password
   const salt = await bcrypt.genSalt(10);
@@ -18,7 +20,7 @@ router.post("/", async (req, res) => {
 
   console.log(data);
   await fs.appendFileSync(
-    path.resolve(__dirname, "../../notes.txt"),
+    path.resolve(__dirname, `../../${email}.txt`),
     data,
     err => {
       if (err) throw err;

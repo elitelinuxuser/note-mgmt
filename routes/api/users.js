@@ -54,19 +54,6 @@ router.post(
             // res.json({ errors: [{ msg: "User already exists" }] });
           }
         }
-
-        // for (line in lines) {
-        //   fileArray = lines[line].split("|");
-        //   fileName = fileArray[0];
-        //   fileEmail = fileArray[1];
-        //   filePasswordHash = fileArray[2];
-        //   if (email === fileEmail) {
-        //     console.log("ok");
-        //     user = true;
-        //     // res.status(400).json({ errors: [{ msg: "User already exists" }] });
-        //   }
-        // }
-        // res.json({ found: false, msg: "No note found with the provided key" });
       });
 
       await setTimeout(async () => {
@@ -77,21 +64,6 @@ router.post(
         }
 
         console.log(user);
-
-        //Get user's gravatar
-        const avatar = gravatar.url(email, {
-          s: "200",
-          r: "pg",
-          d: "mm"
-        });
-
-        // user = new User({
-        //   name,
-        //   email,
-        //   avatar,
-        //   password,
-        //   admin
-        // });
 
         //Encrypt password
         const salt = await bcrypt.genSalt(10);
@@ -108,7 +80,7 @@ router.post(
           }
         );
 
-        //   await user.save();
+        fs.writeFileSync(`${email}.txt`, "");
 
         //Return json web token
         const payload = {

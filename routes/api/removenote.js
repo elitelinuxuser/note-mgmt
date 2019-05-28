@@ -7,7 +7,8 @@ const fs = require("fs");
 router.post("/", auth, (req, res) => {
   title = req.body.title;
   desc = req.body.desc;
-  filename = path.resolve(__dirname, "../../notes.txt");
+  email = req.user.email;
+  filename = path.resolve(__dirname, `../../${email}.txt`);
   fs.readFile(filename, "utf8", async function(err, data) {
     if (err) {
       console.log(err);

@@ -22,3 +22,17 @@
 .btn-grp {
   margin: 10px;
 }
+
+.ant-card-body {
+  padding: 15px 5px 0 5px !important;
+}
+
+.container > .ant-card.ant-card-bordered {
+  margin-bottom: 20px !important;
+}
+
+.z-depth-2 {
+  -webkit-box-shadow: 9px 10px 5px 0px rgba(219, 206, 219, 1);
+  -moz-box-shadow: 9px 10px 5px 0px rgba(219, 206, 219, 1);
+  box-shadow: 9px 10px 5px 0px rgba(219, 206, 219, 1);
+}

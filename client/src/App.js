@@ -9,11 +9,12 @@ import Homepage from "./components/Homepage";
 import Notes from "./components/Notes";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import { Button } from "react-bootstrap";
 
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
 import store from "./store";
+import Search from "./components/Search";
+import PrivateRoute from "./components/PrivateRoute";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -27,12 +28,13 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/notes" component={Notes} />
-        <Route exact path="/" component={Homepage} />
+        <PrivateRoute path="/notes" component={Notes} />
+        <PrivateRoute exact path="/" component={Homepage} />
         <Route path="/login" component={Login} />
-        <Route path="/add" component={AddNote} />
-        <Route path="/list" component={ListNotes} />
+        <PrivateRoute path="/add" component={AddNote} />
+        <PrivateRoute path="/list" component={ListNotes} />
         <Route path="/register" component={Register} />
+        <PrivateRoute path="/search" component={Search} />
       </Switch>
     </Router>
   );

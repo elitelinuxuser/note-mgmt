@@ -60,10 +60,11 @@ class Note extends Component {
     return (
       <Col>
         <Card
+          className="z-depth-2"
           title={title}
           //   extra={<a href="#">More</a>}
-          style={{ width: 300, borderColor: "black", margin: "20px" }}
-          headStyle={{ borderColor: "black" }}
+          style={{ width: 300, borderColor: "#dbcedb", margin: "20px" }}
+          headStyle={{ borderColor: "#dbcedb" }}
           actions={[
             <Icon type="delete" onClick={this.handleDelete} />,
             <Icon type="edit" onClick={this.handleEdit} />
@@ -89,7 +90,7 @@ class Note extends Component {
               </Button>
             </Fragment>
           ) : (
-            <p>{desc}</p>
+            <p style={{ padding: "8px" }}>{desc}</p>
           )}
         </Card>
       </Col>

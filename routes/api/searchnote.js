@@ -8,10 +8,11 @@ const fs = require("fs");
 router.get("/:title", auth, async (req, res) => {
   const list = [];
   const result = [];
+  email = req.user.email;
   const readFile = util.promisify(fs.readFile);
   console.log("hi");
   try {
-    filename = path.resolve(__dirname, "../../notes.txt");
+    filename = path.resolve(__dirname, `../../${email}.txt`);
     readFile(filename, "utf8")
       .then(data => {
         console.log(data);

@@ -1,12 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const auth = require("../../middleware/auth");
 const readline = require("readline");
 const fs = require("fs");
 
-router.get("/", async function(req, res) {
+router.get("/", auth, async function(req, res) {
+  email = req.user.email;
   const list = [];
-  await fs.readFile(path.resolve(__dirname, "../../notes.txt"), function(
+  await fs.readFile(path.resolve(__dirname, `../../${email}.txt`), function(
     err,
     data
   ) {
@@ -14,7 +16,7 @@ router.get("/", async function(req, res) {
       res.send(err);
     }
     let rl = readline.createInterface({
-      input: fs.createReadStream(path.resolve(__dirname, "../../notes.txt"))
+      input: fs.createReadStream(path.resolve(__dirname, `../../${email}.txt`))
     });
     rl.on("line", function(line) {
       let lineObj = {};
@@ -32,7 +34,8 @@ router.get("/", async function(req, res) {
 
 router.get("/titles", async function(req, res) {
   const list = [];
-  await fs.readFile(path.resolve(__dirname, "../../notes.txt"), function(
+  email = req.user.email;
+  await fs.readFile(path.resolve(__dirname, `../../${email}.txt`), function(
     err,
     data
   ) {
@@ -40,7 +43,7 @@ router.get("/titles", async function(req, res) {
       res.send(err);
     }
     let rl = readline.createInterface({
-      input: fs.createReadStream(path.resolve(__dirname, "../../notes.txt"))
+      input: fs.createReadStream(path.resolve(__dirname, `../../${email}.txt`))
     });
     rl.on("line", function(line) {
       lineData = line.split("|");
@@ -54,9 +57,10 @@ router.get("/titles", async function(req, res) {
 
 router.post("/view", async function(req, res) {
   let data;
+  email = req.user.email;
   title = req.body.title;
   hashKey = req.body.hashKey;
-  filename = path.resolve(__dirname, "../../notes.txt");
+  filename = path.resolve(__dirname, `../../${email}.txt`);
   await fs.readFile(filename, "utf8", async function(err, data) {
     if (err) {
       console.log(err);
