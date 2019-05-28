@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Icon, Input, Button, Checkbox, Row } from "antd";
 import { connect } from "react-redux";
 import { login, loadUser } from "../actions/auth";
+import { setAlert } from "../actions/alert";
 import { Redirect } from "react-router-dom";
 
 const FormItem = Form.Item;
@@ -77,9 +78,6 @@ class NormalLoginForm extends React.Component {
                   valuePropName: "checked",
                   initialValue: true
                 })(<Checkbox>Remember me</Checkbox>)}
-                <a className="login-form-forgot" href="">
-                  Forgot password
-                </a>
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -88,6 +86,7 @@ class NormalLoginForm extends React.Component {
                 >
                   Log in
                 </Button>
+                Or <a href="/register">Register now!</a>
               </FormItem>
             </Form>
           </div>
@@ -108,5 +107,5 @@ const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 export default connect(
   mapStateToProps,
-  { login, loadUser }
+  { login, loadUser, setAlert }
 )(WrappedNormalLoginForm);

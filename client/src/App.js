@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "antd/dist/antd.css";
 import "./App.css";
@@ -9,6 +9,7 @@ import Homepage from "./components/Homepage";
 import Notes from "./components/Notes";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Alerts from "./components/Alerts";
 
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
@@ -26,17 +27,20 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
-      <Switch>
-        <PrivateRoute path="/notes" component={Notes} />
-        <PrivateRoute exact path="/" component={Homepage} />
-        <Route path="/login" component={Login} />
-        <PrivateRoute path="/add" component={AddNote} />
-        <PrivateRoute path="/list" component={ListNotes} />
-        <Route path="/register" component={Register} />
-        <PrivateRoute path="/search" component={Search} />
-      </Switch>
-    </Router>
+    <Fragment>
+      <Alerts />
+      <Router>
+        <Switch>
+          <PrivateRoute path="/notes" component={Notes} />
+          <PrivateRoute exact path="/" component={Homepage} />
+          <Route path="/login" component={Login} />
+          <PrivateRoute path="/add" component={AddNote} />
+          <PrivateRoute path="/list" component={ListNotes} />
+          <Route path="/register" component={Register} />
+          <PrivateRoute path="/search" component={Search} />
+        </Switch>
+      </Router>
+    </Fragment>
   );
 };
 

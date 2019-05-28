@@ -90,7 +90,7 @@ export const updateNote = formData => async dispatch => {
       payload: { ...res.data, oldId: formData.id }
     });
 
-    dispatch(setAlert("Note Removed", "success"));
+    dispatch(setAlert("Note Updated", "success"));
   } catch (err) {
     dispatch({
       type: NOTES_ERROR,

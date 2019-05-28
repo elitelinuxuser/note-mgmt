@@ -49,7 +49,7 @@ export const register = ({ name, email, password }) => async dispatch => {
   try {
     const res = await axios.post(`${url}/api/users`, body, config);
 
-    console.log(res.data);
+    dispatch(setAlert("Registration successful!", "success"));
 
     dispatch({
       type: REGISTER_SUCCESS,
@@ -61,7 +61,7 @@ export const register = ({ name, email, password }) => async dispatch => {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach(error => dispatch(setAlert(error.msg, "error")));
     }
 
     dispatch({
@@ -78,11 +78,7 @@ export const login = (email, password) => async dispatch => {
     }
   };
 
-  console.log("Action: Login");
-
   const body = JSON.stringify({ email, password });
-
-  console.log(body);
 
   try {
     const res = await axios.post(`${url}/api/auth`, body, config);
@@ -92,6 +88,8 @@ export const login = (email, password) => async dispatch => {
       payload: res.data
     });
 
+    dispatch(setAlert("User logged in!", "success"));
+
     dispatch(loadUser());
     console.log("Logged In");
   } catch (err) {
@@ -99,7 +97,7 @@ export const login = (email, password) => async dispatch => {
 
     if (errors) {
       console.log(errors);
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach(error => dispatch(setAlert(error.msg, "error", 3000)));
     }
 
     dispatch({
@@ -112,4 +110,5 @@ export const login = (email, password) => async dispatch => {
 export const logout = () => dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
+  dispatch(setAlert("Logout successful!", "success", 3000));
 };

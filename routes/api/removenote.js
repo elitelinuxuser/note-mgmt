@@ -33,7 +33,7 @@ router.post("/", auth, (req, res) => {
       fs.writeFileSync(filename, finalString);
       res.json({ msg: "Deletion Successful" });
     } else {
-      res.json({ msg: "No note found with the provided key" });
+      res.json({ msg: "No note found" });
     }
   });
 });

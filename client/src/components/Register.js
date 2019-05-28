@@ -75,13 +75,6 @@ class NormalRegisterForm extends Component {
                 )}
               </FormItem>
               <FormItem>
-                {/* {getFieldDecorator("remember", {
-                  valuePropName: "checked",
-                  initialValue: true
-                })(<Checkbox>Remember me</Checkbox>)} */}
-                <a className="login-form-forgot" href="">
-                  Forgot password
-                </a>
                 <Button
                   type="primary"
                   htmlType="submit"
@@ -89,6 +82,7 @@ class NormalRegisterForm extends Component {
                 >
                   Register
                 </Button>
+                Or <a href="/login">Login now!</a>
               </FormItem>
             </Form>
           </div>
