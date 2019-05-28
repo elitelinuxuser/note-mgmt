@@ -38,6 +38,7 @@ class NormalLoginForm extends React.Component {
     // console.log(this.props);
     const { getFieldDecorator } = this.props.form;
     const { isAuthenticated } = this.props;
+    console.log(this.props);
     if (!isAuthenticated) {
       return (
         <Row className="row-form" type="flex" align="middle">

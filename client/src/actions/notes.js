@@ -59,7 +59,7 @@ export const deleteNote = formData => async dispatch => {
         "Content-Type": "application/json"
       }
     };
-    await axios.post(`${url}/api/remove`, formData, config);
+    axios.post(`${url}/api/remove`, formData, config);
 
     dispatch({
       type: DELETE_NOTE,

@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Container, Form, Button, Alert, Jumbotron } from "react-bootstrap";
+import { Form, Button, Jumbotron } from "react-bootstrap";
+import { connect } from "react-redux";
+import { setAlert } from "../actions/alert";
 import axios from "axios";
 import Navbar from "./Navbar";
 
@@ -27,6 +29,7 @@ class AddNote extends Component {
     });
   };
   handleSubmit = async e => {
+    const { setAlert } = this.props;
     console.log("Submit");
     e.preventDefault();
     const url = "http://localhost:5000";
@@ -40,13 +43,13 @@ class AddNote extends Component {
       title: "",
       desc: "",
       hashKey: "",
-      msg: res.data.msg,
-      show: true
+      msg: res.data.msg
     });
+    setAlert(res.data.msg, "success");
   };
   render() {
     const handleHide = () => this.setState({ show: false });
-    const { title, desc, hashKey } = this.state;
+    const { title, desc } = this.state;
     return (
       <Fragment>
         <Navbar />
@@ -70,17 +73,9 @@ class AddNote extends Component {
                 value={desc}
               />
             </Form.Group>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-              <Form.Label>Enter passphrase</Form.Label>
-              <Form.Control
-                placeholder="Enter the key"
-                onChange={this.handleKeyChange}
-                value={hashKey}
-              />
-            </Form.Group>
             <Button type="submit">Add Note</Button>
           </Form>
-          {this.state.msg != "" && (
+          {/* {this.state.msg !== "" && (
             <Container>
               <Alert
                 dismissible
@@ -91,11 +86,18 @@ class AddNote extends Component {
                 <Alert.Heading>{this.state.msg}</Alert.Heading>
               </Alert>
             </Container>
-          )}
+          )} */}
         </Jumbotron>
       </Fragment>
     );
   }
 }
 
-export default AddNote;
+const mapStateToProps = state => ({
+  alerts: state.alert
+});
+
+export default connect(
+  mapStateToProps,
+  { setAlert }
+)(AddNote);

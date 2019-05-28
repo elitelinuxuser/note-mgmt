@@ -11,7 +11,7 @@ class NavbarUser extends Component {
   };
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const isAuthenticated = localStorage.getItem("token");
     if (isAuthenticated) {
       return (
         <Navbar bg="primary" variant="dark">
