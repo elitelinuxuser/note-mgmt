@@ -13,10 +13,30 @@ import {
 
 const url = "http://localhost:5000";
 
-// Get posts
+// Get notes
 export const getNotes = () => async dispatch => {
   try {
     const res = await axios.get(`${url}/api/list`);
+    // console.log(res.data);
+
+    dispatch({
+      type: GET_NOTES,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: NOTES_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Get notes by title
+export const getNotesByTitle = () => async dispatch => {
+  try {
+    console.log("Action fired");
+    const res = await axios.get(`${url}/api/list/titles`);
+    console.log("Action complete");
     // console.log(res.data);
 
     dispatch({
@@ -79,7 +99,7 @@ export const updateNote = formData => async dispatch => {
   }
 };
 
-// Add post
+// Add Note
 export const addNote = formData => async dispatch => {
   const config = {
     headers: {

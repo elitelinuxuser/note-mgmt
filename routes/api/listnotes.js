@@ -32,10 +32,10 @@ router.get("/", auth, async function(req, res) {
   });
 });
 
-router.get("/titles", async function(req, res) {
+router.get("/titles", auth, async function(req, res) {
   const list = [];
   email = req.user.email;
-  await fs.readFile(path.resolve(__dirname, `../../${email}.txt`), function(
+  fs.readFile(path.resolve(__dirname, `../../${email}.txt`), function(
     err,
     data
   ) {

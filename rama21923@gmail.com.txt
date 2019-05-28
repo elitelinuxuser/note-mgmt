@@ -1,1 +1,6 @@
 Some thing|I want|$2a$10$VaJxzcrwdgMtMrXZluQ2TuEF8dHHX0HAGxiv79GApsFNl6H46ECsO
+I am awesome|You know I am!|$2a$10$cMJsQ3/RHyPGSEa4Lpr0zepXSoQA/zTiQg7xF5vypsjxs7q2QrEEm
+I dont have to tell you that!|Do I?|$2a$10$iwC1xYAzkt5FjkcnO4SKoe4Pu1/RGtDfkqDeDM6UNBXxOZWrqcA6G
+Idk|Maybe you are dreaming|$2a$10$caUeNgyt0R4R5WDTKJy4euVygQhcq/dg8bllCorieeqDS47IKH.mu
+His phone|Her phoine!|$2a$10$d.RSwshV0OpRABRk.BQeRexfNMpuSjG59EHcgGicMlMjLrma46iae
+everybody's phone|ok|$2a$10$Pv3z6PJXX5aQ.DqeAYoWIetVPmxD.TMcluwbTSlUeQKpbjZ7MESfO

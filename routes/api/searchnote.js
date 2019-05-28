@@ -22,6 +22,7 @@ router.get("/:title", auth, async (req, res) => {
           lineData = lines[line].split("|");
           lineObj.title = lineData[0];
           lineObj.desc = lineData[1];
+          lineObj.id = lineData[2];
           list.push(lineObj);
           if (lineObj.title.includes(req.params.title)) {
             result.push(lineObj);
