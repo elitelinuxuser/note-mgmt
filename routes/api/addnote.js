@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const auth = require("../../middleware/auth");
 const bcrypt = require("bcryptjs");
+const { logger } = require("../../index");
 
 const fs = require("fs");
 
@@ -18,7 +19,11 @@ router.post("/", auth, async (req, res) => {
 
   data = midData + "|" + hashedNote + "\n";
 
-  console.log(data);
+  logger.log({
+    level: "info",
+    message: data
+  });
+
   await fs.appendFileSync(
     path.resolve(__dirname, `../../${email}.txt`),
     data,
